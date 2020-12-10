@@ -1,7 +1,7 @@
 SELECT count(*)
 FROM (
-	SELECT Passports
-		, CASE 
+	SELECT Passports,
+		CASE 
 			WHEN Passports LIKE '%byr%'
 				AND Passports LIKE '%iyr%'
 				AND Passports LIKE '%eyr%'
@@ -11,8 +11,8 @@ FROM (
 				AND Passports LIKE '%pid%'
 				THEN 1
 			ELSE 0
-			END AS isValid
-		, CASE 
+			END AS isValid,
+		CASE 
 			WHEN Passports LIKE '%cid%'
 				THEN 1
 			ELSE 0

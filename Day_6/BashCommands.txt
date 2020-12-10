@@ -1,0 +1,7 @@
+perl -00 -lpe 'tr/\n/ /' AdventDay6.txt > AdventDay6_2.txt
+-- This merges lines between spaces into a single lines
+
+
+sed 's/ //g' Adventday4_2.txt > AdventDay4Cleaned.txt
+
+awk 'BEGIN {RS = ""; OFS = " "}{$1 =$1; print}' AdventDay4.txt > Adventday4_2.txt

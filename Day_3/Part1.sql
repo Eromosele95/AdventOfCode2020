@@ -23,7 +23,7 @@ AS (
 	SELECT (dex + fc.const) % 31 AS Newdex
 		, column2
 		,
-		-- SUBSTRING(column2,(dex-1+const) % 31+1 , 1) AS NextChar, --This Logic is probably wrong....
+		
 		Num + 1 AS NextStep
 		, 3 AS ModConst
 	FROM dbo.AdventDay3Clean d3

@@ -2,26 +2,26 @@ SET STATISTICS IO ON
 
 SELECT
 	-- CASE WHEN 
-	CAST(SUBSTRING(Passports, PATINDEX('%byr%', Passports) + 4, 4) AS INT) AS byr
-	, CAST(SUBSTRING(Passports, PATINDEX('%iyr%', Passports) + 4, 4) AS INT) AS iyr
-	, CAST(SUBSTRING(Passports, PATINDEX('%eyr%', Passports) + 4, 4) AS INT) AS eyr
-	, SUBSTRING(Passports, PATINDEX('%hgt%', Passports) + 4, 5) AS hgt
-	, SUBSTRING(Passports, PATINDEX('%hcl%', Passports) + 4, 7) AS hcl
-	, SUBSTRING(Passports, PATINDEX('%ecl%', Passports) + 4, 3) AS ecl
-	, SUBSTRING(Passports, PATINDEX('%pid%', Passports) + 4, 10) AS pid
-	, --select 10 for checking purposes later
+	CAST(SUBSTRING(Passports, PATINDEX('%byr%', Passports) + 4, 4) AS INT) AS byr,
+	CAST(SUBSTRING(Passports, PATINDEX('%iyr%', Passports) + 4, 4) AS INT) AS iyr,
+	CAST(SUBSTRING(Passports, PATINDEX('%eyr%', Passports) + 4, 4) AS INT) AS eyr,
+	SUBSTRING(Passports, PATINDEX('%hgt%', Passports) + 4, 5) AS hgt,
+	SUBSTRING(Passports, PATINDEX('%hcl%', Passports) + 4, 7) AS hcl,
+	SUBSTRING(Passports, PATINDEX('%ecl%', Passports) + 4, 3) AS ecl,
+	SUBSTRING(Passports, PATINDEX('%pid%', Passports) + 4, 10) AS pid,
+	--select 10 for checking purposes later
 	CASE 
 		WHEN (SUBSTRING(Passports, PATINDEX('%hgt%', Passports) + 4, 6)) LIKE '%in%'
 			THEN LEFT(SUBSTRING(Passports, PATINDEX('%hgt%', Passports) + 4, 6), PATINDEX('%in%', SUBSTRING(Passports, PATINDEX('%hgt%', Passports) + 4, 6)) - 1)
-		END AS hgt_in
-	, CASE 
+		END AS hgt_in,
+	CASE 
 		WHEN (SUBSTRING(Passports, PATINDEX('%hgt%', Passports) + 4, 6)) LIKE '%cm%'
 			THEN LEFT(SUBSTRING(Passports, PATINDEX('%hgt%', Passports) + 4, 6), PATINDEX('%cm%', SUBSTRING(Passports, PATINDEX('%hgt%', Passports) + 4, 6)) - 1)
 		END AS hgt_cm
 INTO #TempTable
 FROM (
-	SELECT Passports
-		, CASE 
+	SELECT Passports,
+		CASE 
 			WHEN Passports LIKE '%byr%'
 				AND Passports LIKE '%iyr%'
 				AND Passports LIKE '%eyr%'
@@ -31,8 +31,8 @@ FROM (
 				AND Passports LIKE '%pid%'
 				THEN 1
 			ELSE 0
-			END AS isValid
-		, CASE 
+			END AS isValid,
+		CASE 
 			WHEN Passports LIKE '%cid%'
 				THEN 1
 			ELSE 0
